@@ -9,6 +9,12 @@ import plotly.express as px
 from typing import Dict, List
 import os
 
+os.environ['STREAMLIT_BROWSER_GATHER_USAGE_STATS'] = 'false'
+os.environ['STREAMLIT_SERVER_ENABLE_STATIC_SERVING'] = 'false'
+os.environ['STREAMLIT_SERVER_ENABLE_CORS'] = 'false'
+os.environ['STREAMLIT_LOGGER_LEVEL'] = 'error'
+
+
 # Initialize Groq client with API key
 API_KEY = os.getenv('GROQ_API_KEY')
 client = Groq(api_key=API_KEY)
@@ -468,4 +474,8 @@ def main():
                         st.rerun()
 
 if __name__ == "__main__":
+    os.environ['STREAMLIT_BROWSER_GATHER_USAGE_STATS'] = 'false'
+    os.environ['STREAMLIT_SERVER_ENABLE_STATIC_SERVING'] = 'false'
+    os.environ['STREAMLIT_SERVER_ENABLE_CORS'] = 'false'
+    os.environ['STREAMLIT_LOGGER_LEVEL'] = 'error'
     main()

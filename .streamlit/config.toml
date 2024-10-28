@@ -1,0 +1,11 @@
+[browser]
+gatherUsageStats = false
+
+[server]
+enableStaticServing = false
+enableCORS = false
+enableXsrfProtection = true
+
+[logger]
+level = "error"
+messageFormat = "%(message)s"
