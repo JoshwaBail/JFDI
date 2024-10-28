@@ -75,7 +75,6 @@ def analyze_candidate_columns_with_llm(dataframe, candidate_columns):
         
         if 'qualitative' in classification:
             qualitative_columns.append(col)
-    ß
     return qualitative_columns
 
 def get_cluster_name(summary, existing_names):
