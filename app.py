@@ -71,11 +71,11 @@ def analyze_candidate_columns_with_llm(dataframe, candidate_columns):
         )
         
         classification = response.choices[0].message.content.strip().lower()
-        st.write(f"Column '{col}' classified as: {classification}")
+        #st.write(f"Column '{col}' classified as: {classification}")
         
         if 'qualitative' in classification:
             qualitative_columns.append(col)
-    
+    ß
     return qualitative_columns
 
 def get_cluster_name(summary, existing_names):
@@ -229,7 +229,6 @@ def find_optimal_clusters(scaled_data):
     fig = px.line(x=list(CLUSTER_RANGE), y=sil_scores, 
                   title='Silhouette Score vs Number of Clusters',
                   labels={'x': 'Number of Clusters', 'y': 'Silhouette Score'})
-    st.plotly_chart(fig)
     
     return sil_scores.index(max(sil_scores)) + 2
 
