@@ -196,9 +196,12 @@ def preprocess_data(data):
     
     # Handle categorical columns
     if column_types['categorical']:
+        # Convert categorical columns to string type before encoding
+        categorical_data = processed_data[column_types['categorical']].astype(str)
+        
         # Updated OneHotEncoder initialization
         onehot_encoder = OneHotEncoder(drop='first', sparse_output=False)
-        categorical_encoded = onehot_encoder.fit_transform(data[column_types['categorical']])
+        categorical_encoded = onehot_encoder.fit_transform(categorical_data)
         categorical_encoded_df = pd.DataFrame(
             categorical_encoded,
             columns=onehot_encoder.get_feature_names_out(column_types['categorical'])
