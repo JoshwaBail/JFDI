@@ -5,6 +5,7 @@ from sklearn.preprocessing import StandardScaler, LabelEncoder, OneHotEncoder
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
 from groq import Groq
+from openai import OpenAI
 import plotly.express as px
 from typing import Dict, List
 import os
@@ -16,8 +17,8 @@ os.environ['STREAMLIT_LOGGER_LEVEL'] = 'error'
 
 
 # Initialize Groq client with API key
-API_KEY = os.getenv('GROQ_API_KEY')
-client = Groq(api_key=API_KEY)
+API_KEY = os.getenv('OPENAI_API_KEY')
+client = OpenAI(api_key=API_KEY)
 CLUSTER_RANGE = range(2, 10)
 
 # Data processing functions
@@ -41,7 +42,7 @@ def classify_column_with_llm(column_name, column_samples):
               f"Please provide your classification ONLY, with no other text or commentary.")
     
     response = client.chat.completions.create(
-        model="llama3-8b-8192",
+        model="gpt-4o",
         messages=[
             {"role": "system", "content": "You are an AI assistant tasked with classifying columns based on sample data."},
             {"role": "user", "content": prompt}
@@ -68,7 +69,7 @@ def analyze_candidate_columns_with_llm(dataframe, candidate_columns):
         )
         
         response = client.chat.completions.create(
-            model="llama3-8b-8192",
+            model="gpt-4o",
             messages=[
                 {"role": "system", "content": "You are an expert at identifying qualitative text data in datasets."},
                 {"role": "user", "content": prompt}
@@ -103,7 +104,7 @@ def get_cluster_name(summary, existing_names):
         }
     ]
     response = client.chat.completions.create(
-        model="llama3-8b-8192",
+        model="gpt-4o",
         messages=messages,
         max_tokens=20
     )
@@ -142,7 +143,7 @@ def ask_cluster_question(cluster_num, question, conversation_history, qual_data_
     
     # Get response from LLM
     response = client.chat.completions.create(
-        model="llama-3.2-90b-text-preview",
+        model="gpt-4o",
         messages=messages,
         max_tokens=600
     )
